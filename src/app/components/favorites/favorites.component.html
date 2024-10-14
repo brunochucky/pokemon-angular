@@ -1,0 +1,24 @@
+<div class="pokemon-container" *ngIf="favoritePokemons">
+    <h1>Favoritos</h1>
+
+    <div *ngIf="favoritePokemons.length > 0; else noFavorites">
+        <table>
+        
+            <tbody>
+                <tr *ngFor="let pokemon of favoritePokemons">
+                    <td class="imgcol"><img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}"></td>
+                    <td><a (click)="goToPokemon(pokemon.id)">{{ pokemon.name | titlecase }}</a></td>
+                    <td align="center"><a (click)="removePokemon(pokemon.id)" class="btn">Remover</a></td>
+                </tr>
+            </tbody>
+        </table>
+            
+
+    </div>
+
+    <ng-template #noFavorites>
+        <p>Nenhum pokemon favoritado.</p>
+    </ng-template>
+
+    <a (click)="goBack()" class="btn">Voltar</a>
+</div>

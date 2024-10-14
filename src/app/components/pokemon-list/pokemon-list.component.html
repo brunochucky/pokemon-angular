@@ -1,0 +1,20 @@
+<div class="pokemon-container">
+    <h1>Pokémons</h1>
+
+    <div class="pokemon-list">
+        <table cellpadding="0" cellspacing="0">
+            <tr *ngFor="let pokemon of pokemonList let i = index" [ngClass]="{ 'even': i % 2 === 0, 'odd': i % 2 !== 0 }" (click)="goToPokemon(pokemon.url)">
+                <td class="imgcol">
+                    <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + getPokemonId(pokemon.url) + '.png'"
+                        [alt]="pokemon.name" [title]="pokemon.name">
+                </td>
+                <td><a>{{ pokemon.name | titlecase }}</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="!previousUrl">🡸</button>
+        <button (click)="nextPage()" [disabled]="!nextUrl">🡺</button>
+    </div>
+</div>

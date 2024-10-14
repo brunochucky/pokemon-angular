@@ -1,0 +1,72 @@
+<div class="pokemon-container" *ngIf="pokemon">
+
+    <div class="heading">
+        <h1>{{ pokemon.name | titlecase }}</h1>
+        <div *ngIf="isFavorite(pokemon.id); else notFavorite">
+            <a [routerLink]="['/favorites']">❤️ Ver favoritos</a>
+        </div>
+        <ng-template #notFavorite>
+            <a (click)="addToFavorites(pokemon.id)">Adicionar aos favoritos</a>
+        </ng-template>
+
+
+    </div>
+    <div class="pokemon-list">
+        <table>
+
+            <tbody>
+            <tr>
+                <td><strong>Imagem:</strong></td>
+                <td><img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + pokemon.id + '.png'"
+                    [alt]="pokemon.name" [title]="pokemon.name"></td>
+            </tr>
+            <tr>
+                <td><strong>Nome:</strong></td>
+                <td>{{pokemon.name | titlecase}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Peso:</strong></td>
+                <td>{{pokemon.weight}}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Habilidades:</strong></td>
+                <td>
+                    <ul *ngFor="let ability of pokemon.abilities">
+                        <li>{{ ability.ability.name | titlecase }}</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>Estatísticas:</strong></td>
+                <td>
+                    <ul *ngFor="let stat of pokemon.stats">
+                        <li>{{ stat.stat.name | titlecase }}: {{stat.base_stat}}</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>Tipos:</strong></td>
+                <td>
+                    <ul *ngFor="let type of pokemon.types">
+                        <li>{{ type.type.name | titlecase }}</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>Som:</strong></td>
+                <td><audio src="{{pokemon.cries.latest}}" controls></audio></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <a (click)="goBack()" class="btn">Voltar</a>
+
+    </div>
+   
+</div>
